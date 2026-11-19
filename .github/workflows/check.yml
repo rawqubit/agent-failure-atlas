@@ -1,0 +1,29 @@
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.9", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Validate every entry and run every reproduction
+        run: python check.py
+      - name: The assembled atlas must match the entries
+        run: python check.py --assemble && git diff --exit-code ATLAS.md
+      - name: Run the whole atlas
+        run: |
+          for id in $(python3 atlas.py list | tail -n +3 | awk '{print $1}'); do
+            python3 atlas.py repro "$id" > /dev/null || exit 1
+          done
+          echo "all reproductions exited 0"
