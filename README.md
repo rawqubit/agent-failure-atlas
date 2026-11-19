@@ -139,6 +139,10 @@ Add an entry for a failure you have been paged for. A good entry is a distinct m
 | check.py | Validator and assembler |
 | docs/ | Taxonomy, triage workflow, entry template, citations |
 
+## Who
+
+Built by [Srinikhil Chakilam](https://srinikhilchakilam.com), an AI security engineer who has been paged by most of these.
+
 ## What this is not
 
 It is not a benchmark, a catalogue of model quirks, or a list of rules to follow; it records failures in the code and systems around the model, and it shows a stubbed model whenever a real one would make the run nondeterministic. A stub proves a mechanism, not a rate, so none of the entries tell you how often a particular model will misbehave.
